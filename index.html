@@ -4,95 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
     <style>
-        body {
+
+        body{
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #222533;
+            margin: 0;
+            height: 100vh;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-        .login-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 400px;
+
+        .container{
+            width: 900px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 20px;
+
+            display: flex;
+
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
         }
-        h2 {
+
+        .left{
+            width: 45%;
+            padding: 50px;
+            color: #1c1f2b;
+        }
+
+        .right{
+            width: 55%;
+            background-color: #2b3042;
+            border-radius: 0px 20px 20px 0px;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .middle{
             text-align: center;
+            padding: 30px;
+        }
+
+        img{
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: block;
             margin-bottom: 20px;
         }
-        input[type="text"], input[type="password"] {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+
+        h1{
+            margin-bottom: 10px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #47536e;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        p{
+            color: #cfcfcf;
         }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .error {
-            color: red;
-            text-align: center;
+
+        input[type="text"],
+        input[type="password"]{
+
+            width: 95%;
+            padding: 12px;
             margin-top: 10px;
+            margin-bottom: 20px;
+
+            border: none;
+            border-radius: 8px;
+
+            background-color: #2f3447;
+            color: white;
         }
+
+        label{
+            color: #1c1f2b;
+        }
+
+        button{
+            width: 100%;
+            padding: 12px;
+
+            background-color: #1c1f2b;
+            color: #ffffff;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+        }
+
+        .forgot{
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .error{
+            color: #ff8b8b;
+            margin-top: 15px;
+            text-align: center;
+        }
+
     </style>
 </head>
+
 <body>
-    <div class="login-container">
-           <img style="width: 100px; height: 100px;  display: flex; justify-content: center; align-items: center; margin-left: 33%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/500px-Default_pfp.svg.png" alt="Profile Picture">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-             <input type="checkbox" id="stay" name="stay" value="stay_logged_in">
-    <label for="stay" style="display: flex; justify-content: center; align-items: center; ">Stay logged in?</label>
-    <br>
-            <button type="submit" href="dashboard.html">Login</button>
-            <br>
-            <br>
-                <button type="button" onclick="window.alert('Call me.')">Forgot username/password?</button>
-        </form>
-        <div id="error" class="error"></div>
+
+    <div class="container">
+
+       
+
+        <div class="left">
+
+            <img src="pfpp.jpg">
+
+            <h1>Login</h1>
+
+            <p>Enter your account details</p>
+
+            <form id="loginForm">
+
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+
+                <input type="checkbox" id="stay">
+                <label for="stay">Stay logged in?</label>
+
+                <br><br>
+
+                <button type="submit">
+                    Login
+                </button>
+
+                <div class="forgot">
+                    Forgot password?
+                </div>
+
+                <div id="error" class="error"></div>
+
+            </form>
+
+        </div>
+
+       
+
+        <div class="right">
+
+            <div class="middle">
+
+                <h1>
+                    Welcome to
+                    <br>
+                    Student Portal
+                </h1>
+
+                <p>
+                    Login to access your dashboard,
+                    announcements, grades, and school updates.
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
 
     <script>
+
         let attempts = 0;
-        const Attempts = 3;
-        const Username = 'janedoe';
-        const Password = 'password';
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        const maxAttempts = 3;
+
+        const Username = "student1234";
+        const Password = "12345";
+
+        document.getElementById("loginForm").addEventListener("submit", function(e){
+
             e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('error');
 
-            if (username === Username && password === Password) {
-                window.location.href = 'dashboard.html';
-            } else {
-                attempts++;
-                if (attempts >= Attempts) {
-                    errorDiv.textContent = 'Too many failed attempts. Login disabled.';
-                    document.querySelector('button').disabled = true;
-                } else {
-                    errorDiv.textContent = `Invalid credentials. ${Attempts - attempts} attempts remaining.`;
-                }
+            const username =
+            document.getElementById("username").value;
+
+            const password =
+            document.getElementById("password").value;
+
+            const errorDiv =
+            document.getElementById("error");
+
+            if(username === Username && password === Password){
+
+                window.location.href = "dashboard.html";
+
             }
+
+            else{
+
+                attempts++;
+
+                if(attempts >= maxAttempts){
+
+                    errorDiv.textContent =
+                    "Too many failed attempts.";
+
+                    document.querySelector("button").disabled = true;
+
+                }
+
+                else{
+
+                    errorDiv.textContent =
+                    "Invalid login. " +
+                    (maxAttempts - attempts) +
+                    " attempts left.";
+
+                }
+
+            }
+
         });
+
     </script>
+
 </body>
+</html>
